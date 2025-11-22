@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelParador.Sesion"
+             Title="Sesion">
+    <Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="piscina.jpg" WidthRequest="600" HeightRequest="270" Margin="0,0,0,10"/>
+            <StackLayout Grid.Row="1" Padding="10,20">
+                <Label FontSize="Title" FontAttributes="Bold" Text="Hola!" TextColor="#D1A011" HorizontalTextAlignment="Center" />
+                <Entry Placeholder="Correo electrónico"  x:Name="usr"/>
+                <Entry Placeholder="Contraseña"  IsPassword="True" x:Name="pwd"/>
+                <Button Text="Iniciar Sesión" BackgroundColor="#D1A011" TextColor="White" x:Name="BtnIr"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Recuperar Contraseña" FontSize="Small" TextColor="Black" FontAttributes="Italic"/>
+                    <Button Text="Registrarse" FontSize="Small" TextColor="Black" FontAttributes="Bold"
+HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HeightRequest="39" WidthRequest="120" x:Name="BtnRegistro"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

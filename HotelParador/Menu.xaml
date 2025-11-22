@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelParador.Menu"
+             Title="Menu">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- SCROLL GENERAL -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="20" Padding="10">
+
+                <!-- Imagen destacada -->
+                <Frame HasShadow="False" Padding="0" CornerRadius="15">
+                    <Image Source="portada1.png" Aspect="AspectFill" HeightRequest="200"/>
+                </Frame>
+
+                <!-- Sección 1 -->
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Perfect for you" FontSize="20" FontAttributes="Bold"/>
+                    <Button Text="See more" BackgroundColor="Transparent" TextColor="Blue"/>
+                </Grid>
+
+                <!-- Tarjetas horizontales -->
+                <ScrollView Orientation="Horizontal">
+                    <HorizontalStackLayout Spacing="15">
+
+                        <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
+                            <VerticalStackLayout>
+                                <Image Source="garden.jpg" HeightRequest="130"  Aspect="AspectFill" />
+                                <Label Text="Garden Room" FontAttributes="Bold" Margin="10,5,10,0"/>
+                                <Label Text="$228 usd" TextColor="#888" Margin="10,0,0,10"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
+                            <VerticalStackLayout>
+                                <Image Source="gardenplus.png" HeightRequest="120"  Aspect="AspectFill"/>
+                                <Label Text="Garden Plus Room" FontAttributes="Bold" Margin="10,5,10,0"/>
+                                <Label Text="$257 usd" TextColor="#888" Margin="10,0,0,10"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+                <!-- Sección 2 -->
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="For this summer" FontSize="20" FontAttributes="Bold"/>
+                    <Button Text="See more" BackgroundColor="Transparent" TextColor="Blue"/>
+                </Grid>
+
+                <!-- Tarjetas horizontales sección 2 -->
+                <ScrollView Orientation="Horizontal">
+                    <HorizontalStackLayout Spacing="15">
+
+                        <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
+                            <VerticalStackLayout>
+                                <Image Source="tropical.png" HeightRequest="110" Aspect="AspectFill"/>
+                                <Label Text="Tropical Room" FontAttributes="Bold" Margin="10,5,10,0"/>
+                                <Label Text="$245 usd" TextColor="#888" Margin="10,0,0,10"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
+                            <VerticalStackLayout>
+                                <Image Source="premiumplus.png" HeightRequest="110" Aspect="AspectFill"/>
+                                <Label Text="Premium Plus Room" FontAttributes="Bold" Margin="10,5,10,0"/>
+                                <Label Text="$310 usd" TextColor="#888" Margin="10,0,0,10"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- BOTTOM NAVIGATION -->
+        <Grid Grid.Row="1"
+          BackgroundColor="White"
+          Padding="10"
+          Margin="0">
+
+            <Grid ColumnDefinitions="*,*,*,*">
+
+                <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
+                    <Image Source="explore_icon.png" WidthRequest="24"/>
+                    <Label Text="Explore" FontSize="12" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                    <Image Source="location.ico" WidthRequest="24"/>
+                    <Label Text="Location" FontSize="12" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                    <Image Source="booking.ico" WidthRequest="24"/>
+                    <Label Text="Booking" FontSize="12" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
+                    <Button
+                        ImageSource="profile.ico"
+        BackgroundColor="Transparent"
+        Clicked="GoToProfile"
+        WidthRequest="50"
+        HeightRequest="50">
+                       
+                    </Button>
+
+                    <Label Text="Profile" FontSize="12" />
+                </VerticalStackLayout>
+
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</ContentPage>

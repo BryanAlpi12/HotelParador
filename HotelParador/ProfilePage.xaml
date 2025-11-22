@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HotelParador.ProfilePage"
+    Title="Perfil">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <!-- Avatar -->
+            <Frame CornerRadius="60" HeightRequest="120" WidthRequest="120" HorizontalOptions="Center" HasShadow="True">
+                <Image x:Name="ImgAvatar" Aspect="AspectFill" />
+            </Frame>
+
+            <!-- Nombre -->
+            <Label x:Name="LblNombre" FontSize="22" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+
+            <!-- Correo -->
+            <Label x:Name="LblEmail" FontSize="14" HorizontalTextAlignment="Center" />
+
+            <!-- Separador -->
+            <BoxView HeightRequest="1" BackgroundColor="#E6E6E6" />
+
+            <!-- Info extra -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Información" FontAttributes="Bold" />
+                <Label x:Name="LblExtra" Text="—" />
+            </VerticalStackLayout>
+
+            <!-- Botones -->
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                <Button Text="Editar perfil" x:Name="BtnEditar" BackgroundColor="#D1A011" TextColor="White"/>
+                <Button Text="Cerrar sesión" x:Name="BtnLogout" BackgroundColor="Transparent" TextColor="#333"/>
+            </HorizontalStackLayout>
+
+
+            <!-- Reservas (opcional) -->
+            <Label Text="Reservas recientes" FontAttributes="Bold" />
+            <CollectionView x:Name="CvReservas" HeightRequest="200" ItemsLayout="VerticalList">
+                
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
