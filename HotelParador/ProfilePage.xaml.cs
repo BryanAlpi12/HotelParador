@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using HotelParador.Models; // define User, Reservation models
+using HotelParador.Models; 
 using System.Collections.ObjectModel;
 
 namespace HotelParador;
@@ -10,7 +10,7 @@ namespace HotelParador;
 [QueryProperty(nameof(Email), "email")]
 public partial class ProfilePage : ContentPage
 {
-    private string supabaseUrl = "https://mduluguemexwsgkpnavb.supabase.co/rest/v1/users";
+    private string supabaseUrl = "https://mduluguemexwsgkpnavb.supabase.co/rest/v1";
     private string supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1kdWx1Z3VlbWV4d3Nna3BuYXZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxNDk1MTQsImV4cCI6MjA3ODcyNTUxNH0.ndTochHhui6-4eQSNqhkNMgzDQf-ZbP8eb_gNRsoxUg";
 
 
@@ -109,9 +109,23 @@ public partial class ProfilePage : ContentPage
 
     private async void BtnEditar_Clicked(object sender, EventArgs e)
     {
-        // Navegar a página de edición, pasando email
-        await Shell.Current.GoToAsync($"///EditProfilePage?email={Uri.EscapeDataString(Email)}");
+        var emailParaEditar = string.IsNullOrEmpty(Email) ? App.UserEmail : Email;
+
+        if (string.IsNullOrEmpty(emailParaEditar))
+        {
+            await DisplayAlert("Error", "No se pudo cargar el correo del usuario.", "OK");
+            return;
+        }
+
+
+        System.Diagnostics.Debug.WriteLine($"Email para editar: {emailParaEditar}");
+
+
+        await Shell.Current.GoToAsync($"{nameof(ProfilePageEdit)}?email={Uri.EscapeDataString(emailParaEditar)}");
+
     }
+
+
 
     private async void BtnLogout_Clicked(object sender, EventArgs e)
     {

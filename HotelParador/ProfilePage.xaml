@@ -10,7 +10,7 @@
 
             <!-- Avatar -->
             <Frame CornerRadius="60" HeightRequest="120" WidthRequest="120" HorizontalOptions="Center" HasShadow="True">
-                <Image x:Name="ImgAvatar" Aspect="AspectFill" />
+                <Image Source="pfp.jpg" WidthRequest="120" HeightRequest="120"/>
             </Frame>
 
             <!-- Nombre -->

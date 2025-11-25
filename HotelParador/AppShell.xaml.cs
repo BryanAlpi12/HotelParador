@@ -7,6 +7,9 @@
             InitializeComponent();
             Routing.RegisterRoute("LocationPage", typeof(LocationPage));
             Routing.RegisterRoute("ProfilePage", typeof(ProfilePage));
+            Routing.RegisterRoute(nameof(ProfilePageEdit), typeof(ProfilePageEdit));
+
+
         }
     }
 }

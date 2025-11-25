@@ -109,14 +109,11 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
-                    <Button
-                        ImageSource="profile.ico"
-                        BackgroundColor="Transparent"
-                        Clicked="GoToProfile"
-                        WidthRequest="50"
-                        HeightRequest="50"> 
-
-                    </Button>
+                    <Image Source="profile.ico" WidthRequest="24">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoToProfile"/>
+                        </Image.GestureRecognizers>
+                    </Image>
 
                     <Label Text="Profile" FontSize="12" />
                 </VerticalStackLayout>

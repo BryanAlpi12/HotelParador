@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HotelParador.ProfilePageEdit"
+    Title="Editar Perfil">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <!-- Avatar -->
+            <Frame CornerRadius="60" HeightRequest="120" WidthRequest="120" HorizontalOptions="Center" HasShadow="True">
+                <Image x:Name="ImgAvatar" Source="pfp.jpg" WidthRequest="120" HeightRequest="120"/>
+            </Frame>
+
+            <!-- Nombre -->
+            <Entry x:Name="EntryNombre" Placeholder="Nombre" />
+
+            <!-- Correo -->
+            <Entry x:Name="EntryEmail" Placeholder="Correo" IsReadOnly="True" />
+
+            <!-- Botón Guardar -->
+            <Button Text="Guardar cambios" BackgroundColor="#D1A011" TextColor="White" Clicked="BtnGuardar_Clicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
