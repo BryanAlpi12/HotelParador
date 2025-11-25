@@ -24,7 +24,9 @@ public partial class Menu : ContentPage
         await Shell.Current.GoToAsync("///ProfilePage");
     }
 
-
-
+    private async void OnBookingTapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new BookingPage());
+    }
 
 }

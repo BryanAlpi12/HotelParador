@@ -25,6 +25,7 @@
                 <ScrollView Orientation="Horizontal">
                     <HorizontalStackLayout Spacing="15">
 
+                        <!-- Garden Room -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="garden.jpg" HeightRequest="130"  Aspect="AspectFill" />
@@ -33,6 +34,7 @@
                             </VerticalStackLayout>
                         </Frame>
 
+                        <!-- Garden Plus -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="gardenplus.png" HeightRequest="120"  Aspect="AspectFill"/>
@@ -54,6 +56,7 @@
                 <ScrollView Orientation="Horizontal">
                     <HorizontalStackLayout Spacing="15">
 
+                        <!-- Tropical -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="tropical.png" HeightRequest="110" Aspect="AspectFill"/>
@@ -62,6 +65,7 @@
                             </VerticalStackLayout>
                         </Frame>
 
+                        <!-- Premium Plus -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="premiumplus.png" HeightRequest="110" Aspect="AspectFill"/>
@@ -97,16 +101,21 @@
                 <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
                     <Image Source="booking.ico" WidthRequest="24"/>
                     <Label Text="Booking" FontSize="12" />
+                    
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBookingTapped"/>
+                    </VerticalStackLayout.GestureRecognizers>
+                    
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
                     <Button
                         ImageSource="profile.ico"
-        BackgroundColor="Transparent"
-        Clicked="GoToProfile"
-        WidthRequest="50"
-        HeightRequest="50">
-                       
+                        BackgroundColor="Transparent"
+                        Clicked="GoToProfile"
+                        WidthRequest="50"
+                        HeightRequest="50"> 
+
                     </Button>
 
                     <Label Text="Profile" FontSize="12" />
