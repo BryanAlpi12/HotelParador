@@ -17,17 +17,25 @@ public partial class Registro : ContentPage
     public Registro()
     {
         InitializeComponent();
-        BtnRegistrarse.Clicked += BtnRegistrarse_Clicked;
+        BtnCrearCuenta.Clicked += BtnCrearCuenta_Clicked; ;
     }
 
-    private async void BtnRegistrarse_Clicked(object sender, EventArgs e)
+    private async void BtnCrearCuenta_Clicked(object? sender, EventArgs e)
     {
+
         var nuevoUsuario = new User
         {
-            username = nombre.Text,
-            email = usr.Text,
+            username = usr.Text,
+            email = email.Text,
             password = pwd.Text
         };
+
+        //Verifica que todos los campos esten completos
+        if (string.IsNullOrWhiteSpace(usr.Text) || string.IsNullOrWhiteSpace(email.Text) || string.IsNullOrWhiteSpace(pwd.Text) || string.IsNullOrWhiteSpace(pwd2.Text))
+        {
+            await DisplayAlert("Error", "Todos los campos son obligatorios", "OK");
+            return;
+        }
 
         var jsonData = JsonConvert.SerializeObject(nuevoUsuario);
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");

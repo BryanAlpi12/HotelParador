@@ -17,12 +17,28 @@ public partial class Sesion : ContentPage
     {
         InitializeComponent();
         BtnIr.Clicked += BtnIr_Clicked;
-        BtnRegistro.Clicked += BtnRegistro_Clicked;
+
+        if (BackgroundImage != null)
+        {
+            BackgroundImage.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "IsLoading")
+                {
+                    System.Diagnostics.Debug.WriteLine($"Imagen cargando: {BackgroundImage.IsLoading}");
+                }
+            };
+        }
     }
+
+    private async void OnRegistrarseClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Registro());
+    }
+
 
     private async void BtnIr_Clicked(object sender, EventArgs e)
     {
-        var email = usr.Text;
+        var email = usr_email.Text;
         var password = pwd.Text;
 
         // FILTRO EXACTO DE SUPABASE REST

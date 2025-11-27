@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HotelParador.Registro"
-             Title="Registro">
-    <Grid>
+<ContentPage
+    x:Class="HotelParador.Registro"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Registro">
+    <!--><Grid>
 
         <Grid>
             <Grid.RowDefinitions>
@@ -20,5 +21,83 @@
                 <Button Text="Registrarse" BackgroundColor="#D1A011" TextColor="White" x:Name="BtnRegistrarse"/>
             </StackLayout>
         </Grid>
-    </Grid>
+    </Grid>-->
+
+    <ScrollView>
+        <Grid>
+
+            <!--  fondo  -->
+            <Image Source="https://mediaim.expedia.com/destination/1/ea30c8b151f0e1cc105ca7f00d4a39a2.jpg" VerticalOptions="Fill" />
+            <BoxView Opacity="0.4" Color="Black" />
+
+            <Border
+                Margin="30,10"
+                BackgroundColor="#CCFFFFFF"
+                HorizontalOptions="Center"
+                Stroke="White"
+                StrokeThickness="1"
+                VerticalOptions="Center"
+                WidthRequest="380">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="25" />
+                </Border.StrokeShape>
+
+                <Border.Shadow>
+                    <Shadow
+                        Brush="Black"
+                        Opacity="0.3"
+                        Radius="20"
+                        Offset="0,10" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Padding="20" Spacing="5">
+
+
+                    <!--  logo  -->
+                    <Image
+                        HeightRequest="200"
+                        Source="https://hotelparador.com/wp-content/uploads/2022/07/Parador-Nature-Resort-Spa-300x151.png"
+                        WidthRequest="300" />
+
+                    <!--  Campos del formulario  -->
+                    <Entry
+                        x:Name="usr"
+                        Placeholder="Nombre de Usuario"
+                        PlaceholderColor="#19437b"
+                        WidthRequest="300" />
+                    <Entry
+                        x:Name="email"
+                        Placeholder="Correo electrónico"
+                        PlaceholderColor="#19437b"
+                        WidthRequest="300" />
+
+                    <Entry
+                        x:Name="pwd"
+                        IsPassword="True"
+                        Placeholder="Contraseña"
+                        PlaceholderColor="#19437b"
+                        WidthRequest="300" />
+                    <Entry
+                        x:Name="pwd2"
+                        IsPassword="True"
+                        Placeholder="Confirmar Contraseña"
+                        PlaceholderColor="#19437b"
+                        WidthRequest="300" />
+
+                    <Button
+                        x:Name="BtnCrearCuenta"
+                        Margin="0,20,0,0"
+                        BackgroundColor="#19437b"
+                        FontAttributes="Bold"
+                        FontFamily="TimesNewRoman"
+                        FontSize="20"
+                        Text="Crear Cuenta"
+                        TextColor="#fec10d"
+                        WidthRequest="300" />
+
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </ScrollView>
 </ContentPage>
