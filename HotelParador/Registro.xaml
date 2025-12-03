@@ -27,8 +27,8 @@
         <Grid>
 
             <!--  fondo  -->
-            <Image Source="https://mediaim.expedia.com/destination/1/ea30c8b151f0e1cc105ca7f00d4a39a2.jpg" VerticalOptions="Fill" />
-            <BoxView Opacity="0.4" Color="Black" />
+            <Image Source="manuel.jpg" Aspect="AspectFill" VerticalOptions="Fill" />
+            <BoxView Opacity="0.2" Color="Black" />
 
             <Border
                 Margin="30,10"

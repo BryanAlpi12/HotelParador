@@ -82,9 +82,9 @@
 
         <!-- BOTTOM NAVIGATION -->
         <Grid Grid.Row="1"
-          BackgroundColor="White"
-          Padding="10"
-          Margin="0">
+              BackgroundColor="White"
+              Padding="10"
+              Margin="0">
 
             <Grid ColumnDefinitions="*,*,*,*">
 
@@ -93,31 +93,35 @@
                     <Label Text="Explore" FontSize="12" />
                 </VerticalStackLayout>
 
+                <!-- LOCATION - EVENTO AGREGADO -->
                 <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
                     <Image Source="location.ico" WidthRequest="24"/>
                     <Label Text="Location" FontSize="12" />
+
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLocationTapped"/>
+                    </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
 
+                <!-- BOOKING -->
                 <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
                     <Image Source="booking.ico" WidthRequest="24"/>
                     <Label Text="Booking" FontSize="12" />
-                    
+
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnBookingTapped"/>
                     </VerticalStackLayout.GestureRecognizers>
-                    
                 </VerticalStackLayout>
 
+                <!-- PROFILE -->
                 <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
                     <Image Source="profile.ico" WidthRequest="24">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoToProfile"/>
                         </Image.GestureRecognizers>
                     </Image>
-
                     <Label Text="Profile" FontSize="12" />
                 </VerticalStackLayout>
-
 
             </Grid>
         </Grid>
