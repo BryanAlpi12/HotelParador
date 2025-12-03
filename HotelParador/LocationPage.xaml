@@ -55,10 +55,10 @@
                        FontSize="20"
                        FontAttributes="Bold"
                        TextColor="#333"/>
-                <Label Text="Manuel Antonio, Costa Rica"
+                <Label Text="Manuel Antonio Norte, Quepos, Costa Rica"
                        FontSize="14"
                        TextColor="#666"/>
-                <Label Text="📍 9.4011, -84.1608"
+                <Label Text="📍 9.3970, -84.1183"
                        FontSize="12"
                        TextColor="#999"/>
             </VerticalStackLayout>

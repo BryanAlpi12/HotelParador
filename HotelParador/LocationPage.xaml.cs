@@ -5,11 +5,11 @@ namespace HotelParador;
 
 public partial class LocationPage : ContentPage
 {
-    // Coordenadas del Hotel Parador
-    private const double HotelLatitude = 9.4011;
-    private const double HotelLongitude = -84.1608;
+    // Coordenadas del Hotel Parador - Plus Code: 9RWJ+WM8
+    private const double HotelLatitude = 9.3970;
+    private const double HotelLongitude = -84.1183;
     private const string HotelName = "Hotel Parador";
-    private const string HotelAddress = "Manuel Antonio, Costa Rica";
+    private const string HotelAddress = "Manuel Antonio Norte, Quepos, Costa Rica";
 
     public LocationPage()
     {
@@ -17,27 +17,40 @@ public partial class LocationPage : ContentPage
         InitializeMap();
     }
 
-    private void InitializeMap()
+    private async void InitializeMap()
     {
-        // Crear ubicación del hotel
-        var hotelLocation = new Location(HotelLatitude, HotelLongitude);
-
-        // Crear pin para el hotel
-        var pin = new Pin
+        try
         {
-            Label = HotelName,
-            Location = hotelLocation,
-            Address = HotelAddress,
-            Type = PinType.Place
-        };
+            // Pequeño delay para asegurar que el mapa se cargue
+            await Task.Delay(500);
 
-        // Agregar pin al mapa
-        Mapa.Pins.Add(pin);
+            // Crear ubicación del hotel
+            var hotelLocation = new Location(HotelLatitude, HotelLongitude);
 
-        // Centrar el mapa en el hotel con zoom apropiado
-        Mapa.MoveToRegion(
-            MapSpan.FromCenterAndRadius(hotelLocation, Distance.FromKilometers(1))
-        );
+            // Crear pin para el hotel
+            var pin = new Pin
+            {
+                Label = HotelName,
+                Location = hotelLocation,
+                Address = HotelAddress,
+                Type = PinType.Place
+            };
+
+            // Agregar pin al mapa
+            Mapa.Pins.Add(pin);
+
+            // Centrar el mapa en el hotel con zoom apropiado
+            Mapa.MoveToRegion(
+                MapSpan.FromCenterAndRadius(hotelLocation, Distance.FromKilometers(1))
+            );
+
+            System.Diagnostics.Debug.WriteLine("Mapa inicializado correctamente");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error al inicializar mapa: {ex.Message}");
+            await DisplayAlert("Error", $"No se pudo cargar el mapa: {ex.Message}", "OK");
+        }
     }
 
     private async void OnBackClicked(object sender, EventArgs e)
