@@ -36,8 +36,8 @@ HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" HeightRequest="3
             <Image
                 x:Name="BackgroundImage"
                 Aspect="AspectFill"
-                Source="manuel.jpg" />
-            <BoxView Opacity="0.2" Color="Black" />
+                Source="manuelantonio.png" />
+            
 
             <!--  Cuadro que rodea formulario  -->
             <Border

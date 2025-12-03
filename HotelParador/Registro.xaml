@@ -27,8 +27,8 @@
         <Grid>
 
             <!--  fondo  -->
-            <Image Source="manuel.jpg" Aspect="AspectFill" VerticalOptions="Fill" />
-            <BoxView Opacity="0.2" Color="Black" />
+            <Image Source="manuelantonio.png" Aspect="AspectFill" VerticalOptions="Fill" />
+            
 
             <Border
                 Margin="30,10"
