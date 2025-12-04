@@ -5,8 +5,8 @@
 
 
     <Grid>
-        <Image Source="manuel.jpg" Aspect="AspectFill" />
-        <BoxView Color="Black" Opacity="0.5" />
+        <Image Source="manuelantonio.png" Aspect="AspectFill" />
+        
 
         <Grid RowDefinitions="*,Auto">
             <Image Grid.Row="0"

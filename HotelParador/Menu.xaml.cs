@@ -1,38 +1,27 @@
-using static System.Runtime.InteropServices.JavaScript.JSType;
+namespace HotelParador;
 
-namespace HotelParador
+public partial class Menu : ContentPage
 {
-    public partial class Menu : ContentPage
+    public Menu(String nombre)
     {
-        public Menu(string nombre)
-        {
-            InitializeComponent();
-            //LblNombre.Text = "Bienvenido " + nombre;
-        }
+        InitializeComponent();
+    }
 
-        private async void BtnLocation_Clicked(object sender, EventArgs e)
-        {
-            // Navegación correcta (ruta normal)
-            await Shell.Current.GoToAsync("LocationPage");
-        }
+    // Evento para ir a Booking
+    private async void OnBookingTapped(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new BookingPage());
+    }
 
-        private async void GoToProfile(object sender, EventArgs e)
-        {
-            // Navegación correcta (ruta normal)
-            await Shell.Current.GoToAsync("ProfilePage");
-        }
+    // Evento para ir a Profile
+    private async void GoToProfile(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ProfilePage());
+    }
 
-        private async void OnBookingTapped(object sender, TappedEventArgs e)
-        {
-            // Si BookingPage NO usa Shell, esta está bien:
-            await Navigation.PushAsync(new BookingPage());
-        }
-
-        private async void GoToProfileEdit(object sender, EventArgs e)
-        {
-            // Navegación correcta (ruta normal)
-            await Shell.Current.GoToAsync("ProfilePageEdit");
-        }
-
+    // Evento para ir a Location 
+    private async void OnLocationTapped(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new LocationPage());
     }
 }

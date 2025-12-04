@@ -3,12 +3,76 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
-    x:Class="HotelParador.LocationPage">
+    x:Class="HotelParador.LocationPage"
+    Title="Ubicación">
 
-    <Grid>
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" BackgroundColor="#6200EA" Padding="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            
+        </Grid>
+
+        <!-- Mapa -->
         <maps:Map x:Name="Mapa"
+                  Grid.Row="1"
                   MapType="Street"
                   IsShowingUser="True" />
+
+        <!-- Información y botón de navegación -->
+        <Grid Grid.Row="2" 
+              BackgroundColor="White" 
+              Padding="20,15"
+              RowSpacing="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Información del hotel -->
+            <VerticalStackLayout Grid.Row="0" Spacing="5">
+                <Label Text="Hotel Parador"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#333"/>
+                <Label Text="Manuel Antonio Norte, Quepos, Costa Rica"
+                       FontSize="14"
+                       TextColor="#666"/>
+                
+            </VerticalStackLayout>
+
+            <BoxView Grid.Row="1" 
+                     HeightRequest="1" 
+                     BackgroundColor="#E0E0E0" 
+                     Margin="0,10"/>
+
+            <!-- Botón único para navegación -->
+            <Button Grid.Row="2"
+                    Text="Cómo llegar"
+                    BackgroundColor="#6200EA"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    Clicked="OnComoLlegarClicked">
+                <Button.ImageSource>
+                    <FontImageSource 
+                        FontFamily="Arial"
+                        Size="20"
+                        Color="White"/>
+                </Button.ImageSource>
+            </Button>
+
+        </Grid>
+
     </Grid>
 
 </ContentPage>
