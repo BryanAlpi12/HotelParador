@@ -5,29 +5,39 @@ namespace HotelParador;
 
 public partial class LocationPage : ContentPage
 {
-    private const double Latitud = 9.39757;
-    private const double Longitud = -84.16920;
-    private const string NombreHotel = "Hotel Parador";
+    // Coordenadas del Hotel Parador
+    private const double HotelLatitude = 9.4011;
+    private const double HotelLongitude = -84.1608;
+    private const string HotelName = "Hotel Parador";
+    private const string HotelAddress = "Manuel Antonio, Costa Rica";
 
     public LocationPage()
     {
         InitializeComponent();
-        ConfigurarMapa();
+        InitializeMap();
     }
 
-    private void ConfigurarMapa()
+    private void InitializeMap()
     {
-        var ubicacionHotel = new Location(Latitud, Longitud);
+        // Crear ubicación del hotel
+        var hotelLocation = new Location(HotelLatitude, HotelLongitude);
+
+        // Crear pin para el hotel
         var pin = new Pin
         {
-            Label = NombreHotel,
-            Address = "Manuel Antonio Norte, Quepos, Costa Rica",
-            Type = PinType.Place,
-            Location = ubicacionHotel
+            Label = HotelName,
+            Location = hotelLocation,
+            Address = HotelAddress,
+            Type = PinType.Place
         };
 
+        // Agregar pin al mapa
         Mapa.Pins.Add(pin);
-        Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(ubicacionHotel, Distance.FromKilometers(1)));
+
+        // Centrar el mapa en el hotel con zoom apropiado
+        Mapa.MoveToRegion(
+            MapSpan.FromCenterAndRadius(hotelLocation, Distance.FromKilometers(1))
+        );
     }
 
     private async void OnBackClicked(object sender, EventArgs e)
@@ -35,21 +45,57 @@ public partial class LocationPage : ContentPage
         await Navigation.PopAsync();
     }
 
-    private async void OnComoLlegarClicked(object sender, EventArgs e)
+    private async void OnGoogleMapsClicked(object sender, EventArgs e)
     {
         try
         {
-            // Crear URI con el formato geo: que Android reconoce automáticamente
-            var uri = $"geo:{Latitud},{Longitud}?q={Latitud},{Longitud}({Uri.EscapeDataString(NombreHotel)})";
+            // URL para Google Maps
+            var googleMapsUrl = $"https://www.google.com/maps/search/?api=1&query={HotelLatitude},{HotelLongitude}";
 
-            // Android mostrará automáticamente las opciones de apps de navegación disponibles
-            await Launcher.OpenAsync(uri);
+            // Intentar abrir con la app de Google Maps primero
+            var supportsUri = await Launcher.CanOpenAsync($"comgooglemaps://?q={HotelLatitude},{HotelLongitude}");
+
+            if (supportsUri)
+            {
+                // Si tiene la app instalada
+                await Launcher.OpenAsync($"comgooglemaps://?q={HotelLatitude},{HotelLongitude}");
+            }
+            else
+            {
+                // Si no tiene la app, abrir en navegador
+                await Launcher.OpenAsync(googleMapsUrl);
+            }
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error",
-                $"No se pudo abrir la navegación: {ex.Message}",
-                "OK");
+            await DisplayAlert("Error", $"No se pudo abrir Google Maps: {ex.Message}", "OK");
+        }
+    }
+
+    private async void OnWazeClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            // URL para Waze
+            var wazeUrl = $"https://waze.com/ul?ll={HotelLatitude},{HotelLongitude}&navigate=yes";
+
+            // Intentar abrir con la app de Waze primero
+            var supportsUri = await Launcher.CanOpenAsync($"waze://?ll={HotelLatitude},{HotelLongitude}&navigate=yes");
+
+            if (supportsUri)
+            {
+                // Si tiene la app instalada
+                await Launcher.OpenAsync($"waze://?ll={HotelLatitude},{HotelLongitude}&navigate=yes");
+            }
+            else
+            {
+                // Si no tiene la app, abrir en navegador
+                await Launcher.OpenAsync(wazeUrl);
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"No se pudo abrir Waze: {ex.Message}", "OK");
         }
     }
 }

@@ -1,345 +1,116 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HotelParador.BookingPage"
-             Title="BookingPage">
+<ContentPage
+    x:Class="HotelParador.BookingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F5F5F5"
+    NavigationPage.HasNavigationBar="False">
 
     <Grid RowDefinitions="Auto,*">
 
-        <!-- Header -->
-        <Grid BackgroundColor="#6200EA" Padding="20,10,20,20">
+        <!--  Header  -->
+        <Grid Padding="20,50,20,20" BackgroundColor="#6200EA">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <ImageButton Source="back_arrow.png"
-                        WidthRequest="24"
-                        HeightRequest="24"
-                        BackgroundColor="Transparent"
-                        Clicked="OnBackClicked"
-                        VerticalOptions="Center"/>
+            <ImageButton
+                BackgroundColor="Transparent"
+                Clicked="OnBackClicked"
+                HeightRequest="24"
+                Source="back_arrow.png"
+                VerticalOptions="Center"
+                WidthRequest="24" />
 
-            <Label Text="Mis Reservaciones "
-                   Grid.Column="1"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   TextColor="White"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"/>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="Mis Reservaciones"
+                TextColor="White"
+                VerticalOptions="Center" />
 
-            <!-- Boton para Nueva Reservación -->
-            <Button Grid.Column="2"
-                   Text="+"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   BackgroundColor="White"
-                   TextColor="#6200EA"
-                   WidthRequest="40"
-                   HeightRequest="40"
-                   CornerRadius="20"
-                   Padding="0"
-                   Clicked="OnNewBookingClicked"
-                   VerticalOptions="Center"/>
+            <!--  Botón Nueva Reservación  -->
+            <Button
+                Grid.Column="2"
+                Padding="0"
+                BackgroundColor="White"
+                Clicked="OnNewBookingClicked"
+                CornerRadius="20"
+                FontAttributes="Bold"
+                FontSize="24"
+                HeightRequest="40"
+                Text="+"
+                TextColor="#6200EA"
+                VerticalOptions="Center"
+                WidthRequest="40" />
         </Grid>
 
-        <!-- Contenido -->
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="20" Spacing="20">
+        <!--  Loading Indicator  -->
+        <ActivityIndicator
+            x:Name="LoadingIndicator"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            IsRunning="True"
+            VerticalOptions="Center"
+            Color="#6200EA" />
 
-                <!-- Tarjeta de Reservación 1 - Activa/Próxima -->
-                <Frame BackgroundColor="White"
-                       CornerRadius="15"
-                       Padding="0"
-                       HasShadow="True">
-                    <Grid RowDefinitions="140, Auto">
-
-                        <!-- Imagen con Badge -->
-                        <Grid>
-                            <Image Source="garden.jpg"
-                                   Aspect="AspectFill"
-                                   HeightRequest="140"/>
-
-                            <!-- Estado de Reserva Confirmada-->
-                            <Frame BackgroundColor="#4CAF50"
-                                   CornerRadius="15"
-                                   Padding="10,5"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Start"
-                                   Margin="10">
-                                <Label Text="Confirmada"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       FontAttributes="Bold"/>
-                            </Frame>
-                        </Grid>
-
-                        <!-- Información -->
-                        <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="10">
-                            <Label Text="Hotel Parador"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   TextColor="#333"/>
-
-                            <!-- Habitación -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="🛏️" FontSize="14"/>
-                                <Label Text="Garden Room"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Fechas -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="📅" FontSize="14"/>
-                                <Label Text="15 Dic - 20 Dic 2025 (5 noches)"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Huéspedes -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="👥" FontSize="14"/>
-                                <Label Text="2 huéspedes"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Código -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="🎫" FontSize="14"/>
-                                <Label Text="Código: HTL20251115001"
-                                       FontSize="12"
-                                       TextColor="#999"/>
-                            </HorizontalStackLayout>
-
-                            <BoxView HeightRequest="1"
-                                    BackgroundColor="#EEE"
-                                    Margin="0,5"/>
-
-                            <!-- Footer con precio y botones -->
-                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                <VerticalStackLayout>
-                                    <Label Text="Total pagado" FontSize="12" TextColor="#999"/>
-                                    <Label Text="xxx"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="#6200EA"/>
-                                </VerticalStackLayout>
-
-                                <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
-                                    <Button Text="Cancelar"
-                                           BackgroundColor="Transparent"
-                                           TextColor="#F44336"
-                                           BorderColor="#F44336"
-                                           BorderWidth="1"
-                                           CornerRadius="10"
-                                           Padding="15,8"
-                                           FontSize="13"/>
-                                    <Button Text="Ver detalles"
-                                           BackgroundColor="#6200EA"
-                                           TextColor="White"
-                                           CornerRadius="10"
-                                           Padding="15,8"
-                                           FontSize="13"
-                                           Clicked="OnViewDetailsClicked"/>
-                                </HorizontalStackLayout>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Grid>
-                </Frame>
-
-                <!-- Tarjeta de Reservación 2 - Completada -->
-                <Frame BackgroundColor="White"
-                       CornerRadius="15"
-                       Padding="0"
-                       HasShadow="True">
-                    <Grid RowDefinitions="140,Auto">
-
-                        <!-- Imagen con Badge -->
-                        <Grid>
-                            <Image Source="premiumplus.png"
-                                   Aspect="AspectFill"
-                                   HeightRequest="140"/>
-
-                            <!-- Estaod de reserva completada -->
-                            <Frame BackgroundColor="#2196F3"
-                                   CornerRadius="15"
-                                   Padding="10,5"
-                                   HasShadow="False"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Start"
-                                   Margin="10">
-                                <Label Text="Completada"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       FontAttributes="Bold"/>
-                            </Frame>
-                        </Grid>
-
-                        <!-- Información -->
-                        <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="10">
-                            <Label Text="Hotel Parador"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   TextColor="#333"/>
-
-                            <!-- Habitación -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="🛏️" FontSize="14"/>
-                                <Label Text="Premium Plus Room"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Fechas -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="📅" FontSize="14"/>
-                                <Label Text="10 Nov - 14 Nov 2025 (4 noches)"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Huéspedes -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="👥" FontSize="14"/>
-                                <Label Text="3 huéspedes"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Código -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="🎫" FontSize="14"/>
-                                <Label Text="Código: HTL20251110002"
-                                       FontSize="12"
-                                       TextColor="#999"/>
-                            </HorizontalStackLayout>
-
-                            <BoxView HeightRequest="1"
-                                    BackgroundColor="#EEE"
-                                    Margin="0,5"/>
-
-                            <!-- Footer con precio y botones -->
-                            <Grid ColumnDefinitions="*,Auto">
-                                <VerticalStackLayout>
-                                    <Label Text="Total pagado"
-                                           FontSize="12"
-                                           TextColor="#999"/>
-                                    <Label Text="xxx"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="#6200EA"/>
-                                </VerticalStackLayout>
-
-                                <Button Grid.Column="1"
-                                       Text="Ver detalles"
-                                       BackgroundColor="#6200EA"
-                                       TextColor="White"
-                                       CornerRadius="10"
-                                       Padding="20,8"
-                                       FontSize="13"
-                                       VerticalOptions="Center"
-                                       Clicked="OnViewDetailsClicked"/>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Grid>
-                </Frame>
-
-                <!-- Tarjeta de Reservación 3 - Cancelada -->
-                <Frame BackgroundColor="White"
-                       CornerRadius="15"
-                       Padding="0"
-                       HasShadow="True">
-                    <Grid RowDefinitions="140,Auto">
-
-                        <!-- Imagen con Badge -->
-                        <Grid>
-                            <Image Source="tropical.png"
-                                   Aspect="AspectFill"
-                                   HeightRequest="140"/>
-
-                            <!-- Overlay oscuro para cancelada -->
-                            <BoxView BackgroundColor="#80000000"/>
-
-                            <!-- Estado Reserva Cancelada -->
-                            <Frame BackgroundColor="#F44336"
-                                   CornerRadius="15"
-                                   Padding="10,5"
-                                   HasShadow="False"
-                                   HorizontalOptions="End"
-                                   VerticalOptions="Start"
-                                   Margin="10">
-                                <Label Text="Cancelada"
-                                       TextColor="White"
-                                       FontSize="12"
-                                       FontAttributes="Bold"/>
-                            </Frame>
-                        </Grid>
-
-                        <!-- Información -->
-                        <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="10">
-                            <Label Text="Hotel Parador"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   TextColor="#333"/>
-
-                            <!-- Habitación -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="🛏️" FontSize="14"/>
-                                <Label Text="Tropical Room"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Fechas -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="📅" FontSize="14"/>
-                                <Label Text="05 Oct - 08 Oct 2025 (3 noches)"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                            <!-- Huéspedes -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="👥" FontSize="14"/>
-                                <Label Text="2 huéspedes"
-                                       FontSize="14"
-                                       TextColor="#666"/>
-                            </HorizontalStackLayout>
-
-                           
-
-                            <!-- Footer con precio -->
-                            <Grid ColumnDefinitions="*,Auto">
-                                <VerticalStackLayout>
-                                    <Label Text="Reembolsado"
-                                           FontSize="12"
-                                           TextColor="#4CAF50"/>
-                                    <Label Text="xxx"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="#999"
-                                           TextDecorations="Strikethrough"/>
-                                </VerticalStackLayout>
-
-                                <Button Grid.Column="1"
-                                       Text="Ver detalles"
-                                       BackgroundColor="#EEE"
-                                       TextColor="#666"
-                                       CornerRadius="10"
-                                       Padding="20,8"
-                                       FontSize="13"
-                                       VerticalOptions="Center"
-                                       Clicked="OnViewDetailsClicked"/>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Grid>
-                </Frame>
-
+        <!--  Lista de Reservaciones  -->
+        <ScrollView
+            x:Name="ReservationsScrollView"
+            Grid.Row="1"
+            IsVisible="False">
+            <VerticalStackLayout
+                x:Name="ReservationsContainer"
+                Padding="20"
+                Spacing="20">
+                <!--  Las reservaciones se cargarán aquí dinámicamente  -->
             </VerticalStackLayout>
         </ScrollView>
+
+        <!--  Estado Vacío  -->
+        <VerticalStackLayout
+            x:Name="EmptyState"
+            Grid.Row="1"
+            Padding="40"
+            HorizontalOptions="Center"
+            IsVisible="False"
+            Spacing="20"
+            VerticalOptions="Center">
+
+            <Label
+                FontSize="80"
+                HorizontalOptions="Center"
+                Opacity="0.3"
+                Text="📋" />
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="Center"
+                Text="No tienes reservaciones por el momento"
+                TextColor="#666" />
+
+            <Label
+                Margin="0,0,0,20"
+                FontSize="14"
+                HorizontalTextAlignment="Center"
+                Text="Explora nuestras habitaciones y haz tu primera reservación"
+                TextColor="#999" />
+
+            <Button
+                Padding="30,15"
+                BackgroundColor="#6200EA"
+                Clicked="OnNewBookingClicked"
+                CornerRadius="25"
+                FontAttributes="Bold"
+                FontSize="16"
+                Text="Hacer una reservación"
+                TextColor="White" />
+        </VerticalStackLayout>
 
     </Grid>
 

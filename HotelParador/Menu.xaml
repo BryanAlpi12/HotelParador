@@ -80,7 +80,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- BOTTOM NAVIGATION -->
+        <!-- BOTON NAVIGATION -->
         <Grid Grid.Row="1"
               BackgroundColor="White"
               Padding="10"
