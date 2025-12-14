@@ -20,7 +20,7 @@
             <Entry x:Name="EntryEmail" Placeholder="Correo" IsReadOnly="True" />
 
             <!-- Botón Guardar -->
-            <Button Text="Guardar cambios" BackgroundColor="#D1A011" TextColor="White" Clicked="BtnGuardar_Clicked" />
+            <Button x:Name="BtnGuardar" Text="Guardar cambios" BackgroundColor="#D1A011" TextColor="White" Clicked="BtnGuardar_Clicked" />
 
         </VerticalStackLayout>
     </ScrollView>

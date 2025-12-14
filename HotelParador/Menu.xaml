@@ -4,6 +4,34 @@
              x:Class="HotelParador.Menu"
              Title="Menu">
 
+
+    <!-- Toolbar con las opciones del menú -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Introducción" 
+                     IconImageSource="info_icon.png"
+                     Order="Secondary" 
+                     Priority="0"
+                     Clicked="OnIntroduccionClicked"/>
+
+        <ToolbarItem Text="Historia" 
+                     IconImageSource="history_icon.png"
+                     Order="Secondary" 
+                     Priority="1"
+                     Clicked="OnHistoriaClicked"/>
+
+        <ToolbarItem Text="Ayuda" 
+                     IconImageSource="help_icon.png"
+                     Order="Secondary" 
+                     Priority="2"
+                     Clicked="OnAyudaClicked"/>
+
+        <ToolbarItem Text="Cancelar Reservación" 
+                     IconImageSource="cancel_icon.png"
+                     Order="Secondary" 
+                     Priority="3"
+                     Clicked="OnCancelarReservaClicked"/>
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="*,Auto">
 
         <!-- SCROLL GENERAL -->

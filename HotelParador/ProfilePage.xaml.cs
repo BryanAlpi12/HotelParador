@@ -1,9 +1,9 @@
 using Newtonsoft.Json;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using HotelParador.Models; 
 using System.Collections.ObjectModel;
+using HotelParador.Services;
+using CommunityToolkit.Mvvm.Messaging;
+
 
 namespace HotelParador;
 
@@ -13,58 +13,104 @@ public partial class ProfilePage : ContentPage
     private string supabaseUrl = "https://mduluguemexwsgkpnavb.supabase.co/rest/v1";
     private string supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1kdWx1Z3VlbWV4d3Nna3BuYXZiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxNDk1MTQsImV4cCI6MjA3ODcyNTUxNH0.ndTochHhui6-4eQSNqhkNMgzDQf-ZbP8eb_gNRsoxUg";
 
-
-    HttpClient cliente = new HttpClient();
-
+    private HttpClient cliente = new HttpClient();
     public string Email { get; set; }
 
-    public ObservableCollection<Reservation> Reservas { get; set; } = new ObservableCollection<Reservation>();
+    // Colección dinámica para las reservas
+    public ObservableCollection<dynamic> Reservas { get; set; } = new ObservableCollection<dynamic>();
 
     public ProfilePage()
     {
         InitializeComponent();
+        BindingContext = this; // IMPORTANTE
+        CvReservas.ItemsSource = Reservas;
         BtnEditar.Clicked += BtnEditar_Clicked;
         BtnLogout.Clicked += BtnLogout_Clicked;
-        CvReservas.ItemsSource = Reservas;
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
+        // Registrar la recepción del mensaje de cancelación
+        WeakReferenceMessenger.Default.Register<ReservaCanceladaMessage>(this, (r, message) =>
+        {
+            System.Diagnostics.Debug.WriteLine($"[ProfilePage] Reserva cancelada: {message.ReservaId}");
+            // Recargar las reservas para reflejar la cancelación
+            _ = LoadReservationsAsync(Email);
+        });
+
+        // Cargar reservas al aparecer
         if (!string.IsNullOrEmpty(Email))
         {
             _ = LoadUserAsync(Email);
             _ = LoadReservationsAsync(Email);
         }
+    
+        else
+        {
+            DisplayAlert("Debug", "El Email está vacío o nulo", "OK");
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        // Desregistrar el mensaje para evitar que se duplique la suscripción
+        WeakReferenceMessenger.Default.Unregister<ReservaCanceladaMessage>(this);
     }
 
     async Task LoadUserAsync(string email)
     {
         try
         {
+            System.Diagnostics.Debug.WriteLine($"=== LoadUserAsync iniciado para: {email} ===");
+
             cliente.DefaultRequestHeaders.Clear();
             cliente.DefaultRequestHeaders.Add("apikey", supabaseKey);
             cliente.DefaultRequestHeaders.Add("Authorization", $"Bearer {supabaseKey}");
-            cliente.DefaultRequestHeaders.Add("Prefer", "return=representation");
 
-            // Obtener usuario por email
             var url = $"{supabaseUrl}/users?email=eq.{Uri.EscapeDataString(email)}&select=*";
+            System.Diagnostics.Debug.WriteLine($"URL: {url}");
+
             var resp = await cliente.GetAsync(url);
             var js = await resp.Content.ReadAsStringAsync();
 
-            var list = JsonConvert.DeserializeObject<List<User>>(js);
-            if (list != null && list.Count > 0)
-            {
-                var user = list[0];
-                LblNombre.Text = user.username ?? "Usuario";
-                LblEmail.Text = user.email ?? "";
+            System.Diagnostics.Debug.WriteLine($"Status: {resp.StatusCode}");
+            System.Diagnostics.Debug.WriteLine($"Response: {js}");
 
-                
+            if (!resp.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Error", $"Error al cargar usuario:\n{resp.StatusCode}\n{js}", "OK");
+                return;
+            }
+
+            var users = JsonConvert.DeserializeObject<List<dynamic>>(js);
+
+            if (users != null && users.Count > 0)
+            {
+                var user = users[0];
+                string username = user.username?.ToString() ?? "Sin nombre";
+                string userEmail = user.email?.ToString() ?? "Sin email";
+
+                System.Diagnostics.Debug.WriteLine($"Usuario encontrado: {username} - {userEmail}");
+
+                // Actualizar UI en el thread principal
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    LblNombre.Text = username;
+                    LblEmail.Text = userEmail;
+                });
+            }
+            else
+            {
+                await DisplayAlert("Info", "No se encontró el usuario en la base de datos", "OK");
             }
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            System.Diagnostics.Debug.WriteLine($"ERROR en LoadUserAsync: {ex.Message}\n{ex.StackTrace}");
+            await DisplayAlert("Error", $"LoadUserAsync:\n{ex.Message}", "OK");
         }
     }
 
@@ -72,85 +118,136 @@ public partial class ProfilePage : ContentPage
     {
         try
         {
-            // Primero buscar user id (asumiendo tabla users tiene id)
-            var urlUser = $"{supabaseUrl}/users?email=eq.{Uri.EscapeDataString(email)}&select=id";
-            var rUser = await cliente.GetAsync(urlUser);
-            var jUser = await rUser.Content.ReadAsStringAsync();
-            var users = JsonConvert.DeserializeObject<List<dynamic>>(jUser);
-            if (users != null && users.Count > 0)
+            System.Diagnostics.Debug.WriteLine($"=== LoadReservationsAsync iniciado para: {email} ===");
+
+            cliente.DefaultRequestHeaders.Clear();
+            cliente.DefaultRequestHeaders.Add("apikey", supabaseKey);
+            cliente.DefaultRequestHeaders.Add("Authorization", $"Bearer {supabaseKey}");
+
+            // 1. Obtener user_id
+            var userUrl = $"{supabaseUrl}/users?email=eq.{Uri.EscapeDataString(email)}&select=id";
+            System.Diagnostics.Debug.WriteLine($"URL User ID: {userUrl}");
+
+            var rUser = await cliente.GetAsync(userUrl);
+            var usersJson = await rUser.Content.ReadAsStringAsync();
+
+            System.Diagnostics.Debug.WriteLine($"User ID Response: {usersJson}");
+
+            var users = JsonConvert.DeserializeObject<List<dynamic>>(usersJson);
+
+            if (users == null || users.Count == 0)
             {
-                var userId = users[0].id;
-
-                var urlRes = $"{supabaseUrl}/reservations?user_id=eq.{userId}&select=*,rooms(*)";
-                var rRes = await cliente.GetAsync(urlRes);
-                var jRes = await rRes.Content.ReadAsStringAsync();
-
-                // Mapea según tu esquema. Ejemplo sencillo:
-                var entries = JsonConvert.DeserializeObject<List<ReservationDto>>(jRes);
-                Reservas.Clear();
-                foreach (var e in entries)
+                System.Diagnostics.Debug.WriteLine("No se encontró el usuario para las reservas");
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Reservas.Add(new Reservation
+                   
+
+                });
+                return;
+            }
+
+            var userId = users[0].id.ToString();
+            System.Diagnostics.Debug.WriteLine($"User ID obtenido: {userId}");
+
+            // 2. Obtener reservas con la información de rooms
+            var resUrl = $"{supabaseUrl}/reservations?user_id=eq.{userId}&select=*,rooms(*)";
+            System.Diagnostics.Debug.WriteLine($"URL Reservas: {resUrl}");
+
+            var rRes = await cliente.GetAsync(resUrl);
+            var resJson = await rRes.Content.ReadAsStringAsync();
+
+            System.Diagnostics.Debug.WriteLine($"Reservas Status: {rRes.StatusCode}");
+            System.Diagnostics.Debug.WriteLine($"Reservas Response: {resJson}");
+
+            if (!rRes.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Error", $"Error al cargar reservas:\n{rRes.StatusCode}\n{resJson}", "OK");
+                return;
+            }
+
+            var resList = JsonConvert.DeserializeObject<List<dynamic>>(resJson);
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Reservas.Clear();
+            });
+
+            List<string> roomNames = new List<string>();
+
+            if (resList != null && resList.Count > 0)
+            {
+                System.Diagnostics.Debug.WriteLine($"Se encontraron {resList.Count} reservas");
+
+                foreach (var reserva in resList)
+                {
+                    // Obtener el nombre de la habitación
+                    string roomName = "Habitación";
+                    try
                     {
-                        id = e.id,
-                        room_name = e.rooms != null ? e.rooms.name : "Habitación",
-                        checkin = e.checkin,
-                        checkout = e.checkout,
-                        total = e.total
+                        if (reserva.rooms != null && reserva.rooms.Name != null)
+                        {
+                            roomName = reserva.rooms.Name.ToString();
+                        }
+                    }
+                    catch
+                    {
+                        // Si falla, usa el valor por defecto
+                    }
+
+                    roomNames.Add(roomName);
+
+                    System.Diagnostics.Debug.WriteLine($"Reserva: {roomName} - {reserva.checkin} - {reserva.checkout} - {reserva.total}");
+
+                    // Crear objeto anónimo para el binding
+                    var reservaObj = new
+                    {
+                        id = reserva.id?.ToString() ?? "0",
+                        room_name = roomName,
+                        checkin = reserva.checkin?.ToString() ?? "-",
+                        checkout = reserva.checkout?.ToString() ?? "-",
+                        total = reserva.total?.ToString() ?? "0"
+                    };
+
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        Reservas.Add(reservaObj);
                     });
                 }
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                   
+                });
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("No se encontraron reservas");
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                  
+                });
+                await DisplayAlert("Info", "No tienes reservas registradas", "OK");
             }
         }
         catch (Exception ex)
         {
-            // no bloquear la UI
+            System.Diagnostics.Debug.WriteLine($"ERROR en LoadReservationsAsync: {ex.Message}\n{ex.StackTrace}");
+            await DisplayAlert("Error", $"LoadReservationsAsync:\n{ex.Message}", "OK");
         }
     }
 
     private async void BtnEditar_Clicked(object sender, EventArgs e)
     {
-        var emailParaEditar = string.IsNullOrEmpty(Email) ? App.UserEmail : Email;
-
-        if (string.IsNullOrEmpty(emailParaEditar))
+        if (string.IsNullOrEmpty(Email))
         {
-            await DisplayAlert("Error", "No se pudo cargar el correo del usuario.", "OK");
+            await DisplayAlert("Error", "No hay email disponible para editar", "OK");
             return;
         }
-
-
-        System.Diagnostics.Debug.WriteLine($"Email para editar: {emailParaEditar}");
-
-
-        await Shell.Current.GoToAsync($"{nameof(ProfilePageEdit)}?email={Uri.EscapeDataString(emailParaEditar)}");
-
+        await Shell.Current.GoToAsync($"{nameof(ProfilePageEdit)}?email={Uri.EscapeDataString(Email)}");
     }
-
-
 
     private async void BtnLogout_Clicked(object sender, EventArgs e)
     {
-
-        // Regresar al login o pantalla principal
         await Shell.Current.GoToAsync("///MainPage");
     }
-}
-
-// --- Models auxiliares (ajusta a tu BD) ---
-public class Reservation
-{
-    public int id { get; set; }
-    public string room_name { get; set; }
-    public string checkin { get; set; }
-    public string checkout { get; set; }
-    public string total { get; set; }
-}
-
-// DTO que refleja join con rooms (ajusta si no haces join)
-public class ReservationDto
-{
-    public int id { get; set; }
-    public string checkin { get; set; }
-    public string checkout { get; set; }
-    public string total { get; set; }
-    public dynamic rooms { get; set; }
 }

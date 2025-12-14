@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelParador.IntroduccionPage"
+             Title="Introducción - Manuel Antonio">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Imagen principal -->
+            <Frame CornerRadius="15" HasShadow="True" Padding="0">
+                <Image Source="manuel_antonio.jpg" 
+                       Aspect="AspectFill"
+                       HeightRequest="250"/>
+            </Frame>
+
+            <!-- Título -->
+            <Label Text="Parque Nacional Manuel Antonio"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="#D1A011"/>
+
+            <!-- Contenido -->
+            <Frame BackgroundColor="#F8F8F8" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+                    <Label FontSize="16" LineHeight="1.5">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Bienvenido al Parque Nacional Manuel Antonio, " 
+                                      FontAttributes="Bold"/>
+                                <Span Text="una joya natural ubicada en la costa del Pacífico de Costa Rica. Este paraíso tropical combina playas de arena blanca, aguas cristalinas y una exuberante selva tropical que alberga una increíble biodiversidad."/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#E0E0E0"/>
+
+                    <Label Text="Características Destacadas" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C5F2D"/>
+
+                    <Label FontSize="15" LineHeight="1.5">
+                        <Label.Text>
+                            - Playas paradisíacas: Playa Manuel Antonio, Playa Espadilla Sur y Playa Espadilla Norte
+
+- Vida silvestre abundante: Monos capuchinos, perezosos de tres dedos, iguanas, mapaches y más de 350 especies de aves
+
+- Senderos naturales: Caminos bien mantenidos que te permiten explorar la selva tropical
+
+- Arrecifes de coral: Perfectos para snorkel y observación de vida marina
+
+- Miradores espectaculares: Vistas panorámicas del océano Pacífico y la costa
+                        </Label.Text>
+                    </Label>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#E0E0E0"/>
+
+                    <Label Text="Tu Estancia" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#D1A011"/>
+
+                    <Label Text="El Hotel Parador se encuentra estratégicamente ubicado cerca del parque, ofreciéndote acceso privilegiado a esta maravilla natural. Disfruta de la comodidad de nuestras instalaciones mientras te sumerges en la belleza y tranquilidad de Manuel Antonio."
+                           FontSize="15"
+                           LineHeight="1.5"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Información adicional -->
+            <Frame BackgroundColor="#E8F5E9" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Datos Importantes !" 
+                           FontSize="16" 
+                           FontAttributes="Bold"/>
+                    <Label FontSize="14" LineHeight="1.5">
+                        <Label.Text>
+                            Ubicacion: Punta Quepos, Manuel Antonio, Costa Rica
+ Horarios: Recepción 24 horas, Parque 7:00 AM - 4:00 PM
+ Clima: Tropical, temperatura promedio 27°C
+ Entrada al parque: Se requiere reserva previa
+                        </Label.Text>
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

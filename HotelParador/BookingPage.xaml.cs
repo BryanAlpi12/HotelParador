@@ -3,7 +3,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using HotelParador.Services;
-using static HotelParador.Services.ReservationService;  
+using static HotelParador.Services.ReservationService;
+using CommunityToolkit.Mvvm.Messaging;
+using HotelParador.Services;
 
 namespace HotelParador
 {
@@ -20,8 +22,26 @@ namespace HotelParador
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            // Registrar la recepción del mensaje de cancelación
+            WeakReferenceMessenger.Default.Register<ReservaCanceladaMessage>(this, (r, message) =>
+            {
+                System.Diagnostics.Debug.WriteLine($"[BookingPage] Reserva cancelada: {message.ReservaId}");
+                // Recargar la lista de reservas para reflejar la cancelación
+                LoadReservations();
+            });
+
+            // Cargar reservas al aparecer
             LoadReservations();
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            // Desregistrar el mensaje para evitar duplicados
+            WeakReferenceMessenger.Default.Unregister<ReservaCanceladaMessage>(this);
+        }
+
 
         private async void LoadReservations()
         {

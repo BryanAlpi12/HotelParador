@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HotelParador.HistoriaPage"
+             Title="Historia de Manuel Antonio">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Imagen histórica -->
+            <Frame CornerRadius="15" HasShadow="True" Padding="0">
+                <Image Source="historia_ma.jpg" 
+                       Aspect="AspectFill"
+                       HeightRequest="200"/>
+            </Frame>
+
+            <!-- Título -->
+            <Label Text="Historia del Parque Nacional"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="#2C5F2D"/>
+
+            <!-- Contenido histórico -->
+            <Frame BackgroundColor="#F8F8F8" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text=" Orígenes" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="#D1A011"/>
+
+                    <Label FontSize="15" LineHeight="1.5">
+                        <Label.Text>
+                            El Parque Nacional Manuel Antonio fue establecido el 15 de noviembre de 1972, convirtiéndose en el tercer parque nacional de Costa Rica. A pesar de ser uno de los más pequeños del país con apenas 683 hectáreas terrestres y 55,000 hectáreas marinas, es también uno de los más visitados y biodiversos.
+                        </Label.Text>
+                    </Label>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#E0E0E0"/>
+
+                    <Label Text="Conservación y Desarrollo" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="#2C5F2D"/>
+
+                    <Label FontSize="15" LineHeight="1.5">
+                        <Label.Text>
+                            Antes de su declaración como área protegida, estas tierras estaban destinadas a convertirse en desarrollos turísticos privados. Gracias a la visión conservacionista del gobierno costarricense y la presión de grupos ambientalistas, se logró preservar este ecosistema único.
+
+El parque toma su nombre de Manuel Antonio Fernández, un colonizador español que habitó la zona en el siglo XIX. La región era conocida por los pueblos indígenas Quepoa, quienes vivían en armonía con la naturaleza mucho antes de la llegada de los europeos.
+                        </Label.Text>
+                    </Label>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#E0E0E0"/>
+
+                    <Label Text="Reconocimiento Internacional" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="#D1A011"/>
+
+                    <Label FontSize="15" LineHeight="1.5">
+                        <Label.Text>
+                            - 1983: Declarado Humedal de Importancia Internacional por la Convención Ramsar
+
+- 1990s: Reconocido como uno de los parques más bellos del mundo por Forbes
+
+- 2011: La revista Forbes lo nombró como uno de los 12 parques nacionales más hermosos del mundo
+
+- Actualidad: Recibe más de 150,000 visitantes anuales de todo el mundo
+                        </Label.Text>
+                    </Label>
+
+                    <BoxView HeightRequest="1" BackgroundColor="#E0E0E0"/>
+
+                    <Label Text="Importancia Ecológica" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="#2C5F2D"/>
+
+                    <Label FontSize="15" LineHeight="1.5">
+                        <Label.Text>
+                            El parque protege 12 islas, siendo las más conocidas Mogote, Serrucho y Olocuita. Estas formaciones rocosas son refugio de aves marinas y fauna marina. La combinación de bosque tropical húmedo, bosque tropical muy húmedo, manglar y vegetación de playa crea uno de los ecosistemas más diversos de Centroamérica.
+
+La zona marina protegida incluye arrecifes de coral, formaciones rocosas submarinas y praderas de algas marinas que albergan tortugas marinas, delfines y ocasionalmente ballenas jorobadas durante su migración.
+                        </Label.Text>
+                    </Label>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Dato curioso -->
+            <Frame BackgroundColor="#FFF3E0" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   HasShadow="False"
+                   BorderColor="#FF9800">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Dato Curioso" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="#F57C00"/>
+                    <Label Text="Manuel Antonio es el hogar del mono tití o ardilla centroamericano, una de las especies de primates más pequeñas del mundo y endémica de esta región de Costa Rica. ¡Estos monitos pesan apenas 750 gramos!"
+                           FontSize="14"
+                           LineHeight="1.5"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
