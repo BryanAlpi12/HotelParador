@@ -63,5 +63,28 @@ public partial class Menu : ContentPage
     {
         await Navigation.PushAsync(new CancelarReservaPage());
     }
+
+    // Para las habitaciones de "Perfect for you"
+    private async void OnGardenRoomTapped(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NewBookingPage());
+    }
+
+    private async void OnGardenPlusRoomTapped(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NewBookingPage());
+    }
+
+    // Para las habitaciones de "For this summer"
+    private async void OnTropicalRoomTapped(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NewBookingPage());
+    }
+
+    private async void OnPremiumPlusRoomTapped(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new NewBookingPage());
+    }
 }
+
 

@@ -46,28 +46,38 @@
                 <!-- Sección 1 -->
                 <Grid ColumnDefinitions="*,Auto">
                     <Label Text="Perfect for you" FontSize="20" FontAttributes="Bold"/>
-                    <Button Text="See more" BackgroundColor="Transparent" TextColor="Blue"/>
+                    
                 </Grid>
 
                 <!-- Tarjetas horizontales -->
                 <ScrollView Orientation="Horizontal">
                     <HorizontalStackLayout Spacing="15">
 
-                        <!-- Garden Room -->
+                        <!-- Garden Room - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
-                                <Image Source="garden.jpg" HeightRequest="130"  Aspect="AspectFill" />
+                                <Image Source="garden.jpg" HeightRequest="130" Aspect="AspectFill" />
                                 <Label Text="Garden Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$228 usd" TextColor="#888" Margin="10,0,0,10"/>
+
+                                <!-- Gesture Recognizer para detectar tap -->
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnGardenRoomTapped"/>
+                                </VerticalStackLayout.GestureRecognizers>
                             </VerticalStackLayout>
                         </Frame>
 
-                        <!-- Garden Plus -->
+                        <!-- Garden Plus - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
-                                <Image Source="gardenplus.png" HeightRequest="120"  Aspect="AspectFill"/>
+                                <Image Source="gardenplus.png" HeightRequest="120" Aspect="AspectFill"/>
                                 <Label Text="Garden Plus Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$257 usd" TextColor="#888" Margin="10,0,0,10"/>
+
+                                <!-- Gesture Recognizer para detectar tap -->
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnGardenPlusRoomTapped"/>
+                                </VerticalStackLayout.GestureRecognizers>
                             </VerticalStackLayout>
                         </Frame>
 
@@ -77,28 +87,38 @@
                 <!-- Sección 2 -->
                 <Grid ColumnDefinitions="*,Auto">
                     <Label Text="For this summer" FontSize="20" FontAttributes="Bold"/>
-                    <Button Text="See more" BackgroundColor="Transparent" TextColor="Blue"/>
+                    
                 </Grid>
 
                 <!-- Tarjetas horizontales sección 2 -->
                 <ScrollView Orientation="Horizontal">
                     <HorizontalStackLayout Spacing="15">
 
-                        <!-- Tropical -->
+                        <!-- Tropical - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="tropical.png" HeightRequest="110" Aspect="AspectFill"/>
                                 <Label Text="Tropical Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$245 usd" TextColor="#888" Margin="10,0,0,10"/>
+
+                                <!-- Gesture Recognizer para detectar tap -->
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTropicalRoomTapped"/>
+                                </VerticalStackLayout.GestureRecognizers>
                             </VerticalStackLayout>
                         </Frame>
 
-                        <!-- Premium Plus -->
+                        <!-- Premium Plus - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="premiumplus.png" HeightRequest="110" Aspect="AspectFill"/>
                                 <Label Text="Premium Plus Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$310 usd" TextColor="#888" Margin="10,0,0,10"/>
+
+                                <!-- Gesture Recognizer para detectar tap -->
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPremiumPlusRoomTapped"/>
+                                </VerticalStackLayout.GestureRecognizers>
                             </VerticalStackLayout>
                         </Frame>
 
