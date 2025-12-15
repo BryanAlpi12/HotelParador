@@ -15,6 +15,8 @@ namespace HotelParador
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Montserrat-VariableFont_wght.ttf", "Montserrat");
+                    fonts.AddFont("Montserrat-Italic-VariableFont_wght.ttf", "MontserratItalic");
                 });
 
 #if DEBUG

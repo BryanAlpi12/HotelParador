@@ -1,33 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HotelParador.MainPage">
-
+             x:Class="HotelParador.MainPage"
+             BackgroundColor="Black">
 
     <Grid>
-        <Image Source="manuel.jpg" Aspect="AspectFill" />
-        <BoxView Color="Black" Opacity="0.2" />
 
-        <Grid RowDefinitions="*,Auto">
-            <Image Grid.Row="0"
-               Source="logo.png"
-               HeightRequest="120"
-               VerticalOptions="Start"
-               HorizontalOptions="Center"
-               Margin="0,100,0,0"/>
+        <!-- Fondo -->
+        <Image Source="manuel.jpg"
+               Aspect="AspectFill" />
 
-            <Button Grid.Row="1"
-                Text="Empezar"
-                x:Name="BtnEmpezar"
-                BackgroundColor="Transparent"
-                FontSize="28"
-                FontAttributes="Italic"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+        <!-- Overlay elegante -->
+        <BoxView Color="Black"
+                 Opacity="0.40" />
+
+        <!-- Contenido -->
+        <Grid RowDefinitions="*,Auto"
+              Padding="30">
+
+            <!-- Logo y texto -->
+            <StackLayout Grid.Row="0"
+                         Spacing="20"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+
+                <Image Source="logo.png"
+                       HeightRequest="150"
+                       HorizontalOptions="Center" />
+
+                <Label Text="Bienvenido a Parador"
+                       FontFamily="Montserrat"
+                       FontAttributes="Bold"
+                       FontSize="22"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center" />
+
+                <Label Text="Descansa. Disfruta. Vive la experiencia."
+                       FontFamily="Montserrat"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="#FFFFFF"
+                       HorizontalTextAlignment="Center" />
+            </StackLayout>
+
+            <!-- Botón principal -->
+            <Frame Grid.Row="1"
+                   CornerRadius="30"
+                   BackgroundColor="#C9A24D"
+                   Padding="0"
+                   Margin="0,0,0,40"
+                   HasShadow="False"
+                   HorizontalOptions="Center">
+
+                <Button x:Name="BtnEmpezar"
+                        Text="EMPEZAR"
+                        FontFamily="Montserrat"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        Padding="50,16" />
+            </Frame>
 
         </Grid>
 
     </Grid>
-
 
 </ContentPage>
