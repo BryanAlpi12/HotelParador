@@ -12,7 +12,7 @@
 
         <!-- Overlay elegante -->
         <BoxView Color="Black"
-                 Opacity="0.40" />
+                 Opacity="0.45" />
 
         <!-- Contenido -->
         <Grid RowDefinitions="*,Auto"

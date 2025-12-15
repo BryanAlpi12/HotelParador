@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
     x:Class="HotelParador.LocationPage"
-    Title="Ubicación">
+    Title="Ubicación"
+    x:Name="LocationPageRoot">
 
     <Grid RowDefinitions="Auto,*,Auto">
 
@@ -37,7 +38,7 @@
                   MapType="Street"
                   IsShowingUser="True" />
 
-        <!-- Botones de navegación -->
+        <!-- Información y botón de navegación -->
         <Grid Grid.Row="2" 
               BackgroundColor="White" 
               Padding="20,15"
@@ -55,12 +56,10 @@
                        FontSize="20"
                        FontAttributes="Bold"
                        TextColor="#333"/>
-                <Label Text="Manuel Antonio, Costa Rica"
+                <Label Text="Manuel Antonio Norte, Quepos, Costa Rica"
                        FontSize="14"
                        TextColor="#666"/>
-                <Label Text="📍 9.4011, -84.1608"
-                       FontSize="12"
-                       TextColor="#999"/>
+                
             </VerticalStackLayout>
 
             <BoxView Grid.Row="1" 
@@ -68,43 +67,24 @@
                      BackgroundColor="#E0E0E0" 
                      Margin="0,10"/>
 
-            <!-- Botones -->
-            <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+            <!-- Botón único para navegación -->
+            <Button Grid.Row="2"
+                    Text="Cómo llegar"
+                    BackgroundColor="#6200EA"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    Clicked="OnComoLlegarClicked">
+                <Button.ImageSource>
+                    <FontImageSource 
+                        FontFamily="Arial"
+                        Size="20"
+                        Color="White"/>
+                </Button.ImageSource>
+            </Button>
 
-                <!-- Botón Google Maps -->
-                <Button Grid.Column="0"
-                        Text="Abrir en Google Maps"
-                        BackgroundColor="#4285F4"
-                        TextColor="White"
-                        CornerRadius="10"
-                        FontSize="14"
-                        Clicked="OnGoogleMapsClicked">
-                    <Button.ImageSource>
-                        <FontImageSource 
-                            Glyph="📍"
-                            FontFamily="Arial"
-                            Size="20"
-                            Color="White"/>
-                    </Button.ImageSource>
-                </Button>
-
-                <!-- Botón Waze -->
-                <Button Grid.Column="1"
-                        Text="Abrir en Waze"
-                        BackgroundColor="#33CCFF"
-                        TextColor="White"
-                        CornerRadius="10"
-                        FontSize="14"
-                        Clicked="OnWazeClicked">
-                    <Button.ImageSource>
-                        <FontImageSource 
-                            Glyph="🚗"
-                            FontFamily="Arial"
-                            Size="20"
-                            Color="White"/>
-                    </Button.ImageSource>
-                </Button>
-            </Grid>
         </Grid>
 
     </Grid>
