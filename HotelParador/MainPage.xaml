@@ -10,9 +10,7 @@
         <Image Source="manuel.jpg"
                Aspect="AspectFill" />
 
-        <!-- Overlay elegante -->
-        <BoxView Color="Black"
-                 Opacity="0.45" />
+   
 
         <!-- Contenido -->
         <Grid RowDefinitions="*,Auto"

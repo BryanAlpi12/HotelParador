@@ -4,30 +4,29 @@
              x:Class="HotelParador.Menu"
              Title="Menu">
 
-
-    <!-- Toolbar con las opciones del menú -->
+    <!-- Toolbar -->
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Introducción" 
+        <ToolbarItem Text="Introducción"
                      IconImageSource="info_icon.png"
-                     Order="Secondary" 
+                     Order="Secondary"
                      Priority="0"
                      Clicked="OnIntroduccionClicked"/>
 
-        <ToolbarItem Text="Historia" 
+        <ToolbarItem Text="Historia"
                      IconImageSource="history_icon.png"
-                     Order="Secondary" 
+                     Order="Secondary"
                      Priority="1"
                      Clicked="OnHistoriaClicked"/>
 
-        <ToolbarItem Text="Ayuda" 
+        <ToolbarItem Text="Ayuda"
                      IconImageSource="help_icon.png"
-                     Order="Secondary" 
+                     Order="Secondary"
                      Priority="2"
                      Clicked="OnAyudaClicked"/>
 
-        <ToolbarItem Text="Cancelar Reservación" 
+        <ToolbarItem Text="Cancelar Reservación"
                      IconImageSource="cancel_icon.png"
-                     Order="Secondary" 
+                     Order="Secondary"
                      Priority="3"
                      Clicked="OnCancelarReservaClicked"/>
     </ContentPage.ToolbarItems>
@@ -38,43 +37,69 @@
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="20" Padding="10">
 
-                <!-- Imagen destacada -->
+                <!-- CARRUSEL -->
                 <Frame HasShadow="False" Padding="0" CornerRadius="15">
-                    <Image Source="portada1.png" Aspect="AspectFill" HeightRequest="200"/>
+                    <VerticalStackLayout>
+
+                        <CarouselView HeightRequest="200"
+                                      IndicatorView="indicator"
+                                      Loop="True">
+
+                            <CarouselView.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>parador4.jpg</x:String>
+                                    <x:String>portada1.png</x:String>
+                                    <x:String>parador1.jpg</x:String>
+                                    <x:String>parador2.jpg</x:String>
+                                    <x:String>parador3.jpg</x:String>
+                                </x:Array>
+                            </CarouselView.ItemsSource>
+
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding}"
+                                           Aspect="AspectFill"/>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+
+                        </CarouselView>
+
+                        <IndicatorView x:Name="indicator"
+                                       IndicatorColor="#CCCCCC"
+                                       SelectedIndicatorColor="#000000"
+                                       HorizontalOptions="Center"
+                                       Margin="0,5"/>
+
+                    </VerticalStackLayout>
                 </Frame>
 
-                <!-- Sección 1 -->
+                <!-- SECCIÓN 1 -->
                 <Grid ColumnDefinitions="*,Auto">
-                    <Label Text="Perfect for you" FontSize="20" FontAttributes="Bold"/>
-                    
+                    <Label Text="Perfect for you"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
                 </Grid>
 
-                <!-- Tarjetas horizontales -->
+                <!-- TARJETAS -->
                 <ScrollView Orientation="Horizontal">
                     <HorizontalStackLayout Spacing="15">
 
-                        <!-- Garden Room - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
-                                <Image Source="garden.jpg" HeightRequest="130" Aspect="AspectFill" />
+                                <Image Source="garden.jpg" HeightRequest="130" Aspect="AspectFill"/>
                                 <Label Text="Garden Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$228 usd" TextColor="#888" Margin="10,0,0,10"/>
-
-                                <!-- Gesture Recognizer para detectar tap -->
                                 <VerticalStackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnGardenRoomTapped"/>
                                 </VerticalStackLayout.GestureRecognizers>
                             </VerticalStackLayout>
                         </Frame>
 
-                        <!-- Garden Plus - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="gardenplus.png" HeightRequest="120" Aspect="AspectFill"/>
                                 <Label Text="Garden Plus Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$257 usd" TextColor="#888" Margin="10,0,0,10"/>
-
-                                <!-- Gesture Recognizer para detectar tap -->
                                 <VerticalStackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnGardenPlusRoomTapped"/>
                                 </VerticalStackLayout.GestureRecognizers>
@@ -84,38 +109,32 @@
                     </HorizontalStackLayout>
                 </ScrollView>
 
-                <!-- Sección 2 -->
+                <!-- SECCIÓN 2 -->
                 <Grid ColumnDefinitions="*,Auto">
-                    <Label Text="For this summer" FontSize="20" FontAttributes="Bold"/>
-                    
+                    <Label Text="For this summer"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
                 </Grid>
 
-                <!-- Tarjetas horizontales sección 2 -->
                 <ScrollView Orientation="Horizontal">
                     <HorizontalStackLayout Spacing="15">
 
-                        <!-- Tropical - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="tropical.png" HeightRequest="110" Aspect="AspectFill"/>
                                 <Label Text="Tropical Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$245 usd" TextColor="#888" Margin="10,0,0,10"/>
-
-                                <!-- Gesture Recognizer para detectar tap -->
                                 <VerticalStackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnTropicalRoomTapped"/>
                                 </VerticalStackLayout.GestureRecognizers>
                             </VerticalStackLayout>
                         </Frame>
 
-                        <!-- Premium Plus - CON TAP GESTURE -->
                         <Frame WidthRequest="200" CornerRadius="15" HasShadow="True">
                             <VerticalStackLayout>
                                 <Image Source="premiumplus.png" HeightRequest="110" Aspect="AspectFill"/>
                                 <Label Text="Premium Plus Room" FontAttributes="Bold" Margin="10,5,10,0"/>
                                 <Label Text="$310 usd" TextColor="#888" Margin="10,0,0,10"/>
-
-                                <!-- Gesture Recognizer para detectar tap -->
                                 <VerticalStackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnPremiumPlusRoomTapped"/>
                                 </VerticalStackLayout.GestureRecognizers>
@@ -128,47 +147,38 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- BOTON NAVIGATION -->
-        <Grid Grid.Row="1"
-              BackgroundColor="White"
-              Padding="10"
-              Margin="0">
-
+        <!-- NAVIGATION BAR -->
+        <Grid Grid.Row="1" BackgroundColor="White" Padding="10">
             <Grid ColumnDefinitions="*,*,*,*">
 
                 <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center">
                     <Image Source="explore_icon.png" WidthRequest="24"/>
-                    <Label Text="Explore" FontSize="12" />
+                    <Label Text="Explore" FontSize="12"/>
                 </VerticalStackLayout>
 
-                <!-- LOCATION - EVENTO AGREGADO -->
                 <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
                     <Image Source="location.ico" WidthRequest="24"/>
-                    <Label Text="Location" FontSize="12" />
-
+                    <Label Text="Location" FontSize="12"/>
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnLocationTapped"/>
                     </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
 
-                <!-- BOOKING -->
                 <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
                     <Image Source="booking.ico" WidthRequest="24"/>
-                    <Label Text="Booking" FontSize="12" />
-
+                    <Label Text="Booking" FontSize="12"/>
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnBookingTapped"/>
                     </VerticalStackLayout.GestureRecognizers>
                 </VerticalStackLayout>
 
-                <!-- PROFILE -->
                 <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center">
                     <Image Source="profile.ico" WidthRequest="24">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="GoToProfile"/>
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Text="Profile" FontSize="12" />
+                    <Label Text="Profile" FontSize="12"/>
                 </VerticalStackLayout>
 
             </Grid>
