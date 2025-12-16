@@ -59,10 +59,10 @@ public partial class Menu : ContentPage
     }
 
     // Cancelar Reservación
-    private async void OnCancelarReservaClicked(object sender, EventArgs e)
+   /* private async void OnCancelarReservaClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new CancelarReservaPage());
-    }
+        await Navigation.PushAsync(new CancelarReservaPage(reservation useremail));
+    } */
 
     // Para las habitaciones de "Perfect for you"
     private async void OnGardenRoomTapped(object sender, EventArgs e)

@@ -42,7 +42,7 @@ namespace HotelParador
             WeakReferenceMessenger.Default.Unregister<ReservaCanceladaMessage>(this);
         }
 
-
+        // Cargar las reservaciones del usuario en el booking page
         private async void LoadReservations()
         {
             try
@@ -97,6 +97,7 @@ namespace HotelParador
             }
         }
 
+        // Crear una tarjeta de reservación
         private Frame CreateReservationCard(ReservationWithRoom reservation)
         {
             var frame = new Frame
@@ -240,6 +241,18 @@ namespace HotelParador
                 TextColor = Color.FromArgb("#6200EA")
             });
 
+            // Grid para los botones
+            var buttonsGrid = new Grid
+            {
+                ColumnDefinitions =
+        {
+            new ColumnDefinition { Width = GridLength.Star },
+            new ColumnDefinition { Width = new GridLength(10) }, // Espacio entre botones
+            new ColumnDefinition { Width = GridLength.Star }
+        }
+            };
+
+            // Botón de ver detalles
             var detailsButton = new Button
             {
                 Text = "Ver detalles",
@@ -251,9 +264,27 @@ namespace HotelParador
             };
             detailsButton.Clicked += (s, e) => OnViewDetailsClicked(reservation);
 
+            // Botón de cancelar (solo si la reserva no esta en curso)
+            var cancelButton = new Button
+            {
+                Text = "Cancelar",
+                BackgroundColor = Color.FromArgb("#FF5252"), // Rojo
+                TextColor = Colors.White,
+                CornerRadius = 10,
+                FontSize = 13,
+                HeightRequest = 45
+            };
+            
+            cancelButton.Clicked += async (s, e) => OnCancelReservationClicked(reservation);
+
+            // Agregar botones al grid
+            buttonsGrid.Children.Add(detailsButton);
+            Grid.SetColumn(cancelButton, 2);
+            buttonsGrid.Children.Add(cancelButton);
+
             footer.Children.Add(priceStack);
-            Grid.SetColumn(detailsButton, 1);
-            footer.Children.Add(detailsButton);
+            footer.Children.Add(buttonsGrid);
+
 
             // Agregar elementos al stack
             infoStack.Children.Add(hotelLabel);
@@ -264,7 +295,7 @@ namespace HotelParador
             infoStack.Children.Add(separator);
             infoStack.Children.Add(footer);
 
-            // Agregar al grid
+            // Agregar al grid principal con detalles
             grid.Children.Add(imageContainer);
             Grid.SetRow(infoStack, 1);
             grid.Children.Add(infoStack);
@@ -320,6 +351,46 @@ namespace HotelParador
             }
 
             await DisplayAlert("Detalles de Reservación", message, "Cerrar");
+        }
+
+
+        private async void OnCancelReservationClicked(ReservationWithRoom reservation)
+        {
+            try
+            {
+                // Verificar si la reservación ya está en curso o completada
+                var status = GetStatusText(reservation.checkin, reservation.checkout);
+
+                if (status == "En curso" || status == "Completada")
+                {
+                    await DisplayAlert(
+                        "No se puede cancelar",
+                        "Solo puedes cancelar reservaciones que aún no han iniciado.",
+                        "OK"
+                    );
+                    return;
+                }
+
+                // Obtener el email del usuario logueado
+                string userEmail = App.UserEmail;
+
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    await DisplayAlert("Error", "No hay usuario logueado", "OK");
+                    return;
+                }
+
+                // Abrir la nueva ventana de cancelación con verificación de correo
+                await Navigation.PushAsync(new CancelarReservaPage(reservation, userEmail));
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert(
+                    "Error",
+                    $"Error al abrir la página de cancelación: {ex.Message}",
+                    "OK"
+                );
+            }
         }
 
         private async void OnNewBookingClicked(object sender, EventArgs e)

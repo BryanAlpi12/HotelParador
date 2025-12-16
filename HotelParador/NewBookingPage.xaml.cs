@@ -84,13 +84,13 @@ namespace HotelParador
                 {
                     try
                     {
-                        // Obtener max_guests (IMPORTANTE: usa max_guests, no guests)
+                        // Obtener max_guests 
                         int maxGuests = 2; // Default
                         string guestsRaw = null;
 
                         if (r.max_guests != null)
                         {
-                            // Convertir a int (puede venir como decimal desde la BD)
+                            // Convertir a int, se manejan varios tipos de datos posibles
                             if (r.max_guests is int intValue)
                             {
                                 maxGuests = intValue;

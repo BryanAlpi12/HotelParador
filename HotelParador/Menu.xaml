@@ -24,11 +24,11 @@
                      Priority="2"
                      Clicked="OnAyudaClicked"/>
 
-        <ToolbarItem Text="Cancelar Reservación"
+       <!-- <ToolbarItem Text="Cancelar Reservación"
                      IconImageSource="cancel_icon.png"
                      Order="Secondary"
                      Priority="3"
-                     Clicked="OnCancelarReservaClicked"/>
+                     Clicked="OnCancelarReservaClicked"/> -->
     </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="*,Auto">

@@ -43,7 +43,7 @@ namespace HotelParador.Services
             public int NumberOfNights => (checkout - checkin).Days;
         }
 
-        // ✅ MÉTODO CORREGIDO - Obtener reservaciones del usuario con datos de habitación
+        //  Obtener reservaciones del usuario con datos de habitación
         public async Task<List<ReservationWithRoom>> GetUserReservationsAsync(string userEmail)
         {
             try
@@ -315,6 +315,7 @@ namespace HotelParador.Services
                     }
                 }
 
+                //Se acabaron las habitaciones disponibles
                 if (validAvailable.Count == 0)
                 {
                     throw new Exception($"No hay habitaciones disponibles del tipo {room.name}. Por favor, intenta con otra categoría.");

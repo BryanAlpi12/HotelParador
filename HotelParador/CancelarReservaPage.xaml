@@ -1,158 +1,212 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HotelParador.CancelarReservaPage"
-             Title="Cancelar Reservación">
+<ContentPage
+    x:Class="HotelParador.CancelarReservaPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Cancelar Reservación">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="25">
 
-            <!-- Encabezado -->
-            <Frame BackgroundColor="#FFEBEE" 
-                   CornerRadius="10" 
-                   Padding="15"
-                   HasShadow="False">
+            <!--  Encabezado  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#FFEBEE"
+                CornerRadius="10"
+                HasShadow="False">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text=" Cancelación de Reserva" 
-                           FontSize="20" 
-                           FontAttributes="Bold"
-                           TextColor="#C62828"/>
-                    <Label Text="Ingresa los datos de tu reservación para proceder con la cancelación."
-                           FontSize="14"
-                           TextColor="#666"/>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        Text=" Cancelación de Reserva"
+                        TextColor="#C62828" />
+                    <Label
+                        FontSize="14"
+                        Text="Ingresa los datos de tu reservación para proceder con la cancelación."
+                        TextColor="#666" />
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Formulario -->
-            <Frame BackgroundColor="White" 
-                   CornerRadius="10" 
-                   Padding="20"
-                   HasShadow="True">
+
+            <!--  Detalles de Reservacion  -->
+            <Frame
+                Padding="20"
+                BackgroundColor="White"
+                CornerRadius="15"
+                HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label
+                        Margin="0,0,0,10"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Detalles de la Reservación"
+                        TextColor="#333333" />
+
+                    <!--  ID de Reservación  -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label FontSize="16" Text="🎫" />
+                        <Label
+                            FontSize="14"
+                            Text="Código:"
+                            TextColor="#666666" />
+                        <Label
+                            x:Name="ReservacionIdLabel"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="#000"
+                            TextColor="#6200EA" />
+                    </HorizontalStackLayout>
+
+                    <!--  Habitación  -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label FontSize="16" Text="🛏️" />
+                        <Label
+                            x:Name="RoomNameLabel"
+                            FontSize="14"
+                            Text="Habitación"
+                            TextColor="#333333" />
+                    </HorizontalStackLayout>
+
+                    <!--  Fechas  -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label FontSize="16" Text="📅" />
+                        <Label
+                            x:Name="DatesLabel"
+                            FontSize="14"
+                            Text="Fechas"
+                            TextColor="#333333" />
+                    </HorizontalStackLayout>
+
+                    <!--  Total  -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label FontSize="16" Text="💰" />
+                        <Label
+                            FontSize="14"
+                            Text="Total:"
+                            TextColor="#666666" />
+                        <Label
+                            x:Name="TotalLabel"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="$0.00"
+                            TextColor="#333333" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <!--  Formulario  -->
+            <Frame
+                Padding="20"
+                BackgroundColor="White"
+                CornerRadius="10"
+                HasShadow="True">
                 <VerticalStackLayout Spacing="20">
 
-                    <Label Text="Datos de la Reservación" 
-                           FontSize="18" 
-                           FontAttributes="Bold"/>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Datos de la Reservación" />
 
-                    <!-- Número de Reserva -->
+                    <!--  Email  -->
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Número de Reserva *" 
-                               FontSize="14"
-                               TextColor="#666"/>
-                        <Entry x:Name="EntryNumeroReserva"
-                               Placeholder="Ej: RES-12345"
-                               Keyboard="Numeric"/>
+                        <Label
+                            FontSize="14"
+                            Text="Correo Electrónico *"
+                            TextColor="#666" />
+                        <Entry
+                            x:Name="EntryEmail"
+                            Keyboard="Email"
+                            Placeholder="tu@email.com" />
                     </VerticalStackLayout>
 
-                    <!-- Email -->
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Correo Electrónico *" 
-                               FontSize="14"
-                               TextColor="#666"/>
-                        <Entry x:Name="EntryEmail"
-                               Placeholder="tu@email.com"
-                               Keyboard="Email"/>
-                    </VerticalStackLayout>
+                    <!--  Mensjaje de advertencia  -->
+                    <Frame
+                        Margin="0,10,0,0"
+                        Padding="12"
+                        BackgroundColor="#FFF3CD"
+                        BorderColor="#FFC107"
+                        CornerRadius="8"
+                        HasShadow="False">
+                        <Label
+                            FontSize="12"
+                            HorizontalTextAlignment="Center"
+                            Text="⚠️ Esta acción no se puede deshacer. La habitación será liberada automáticamente."
+                            TextColor="#856404" />
+                    </Frame>
 
-                    <!-- Fecha de Check-in (para verificación) -->
+                    <!--  Motivo (opcional)  -->
                     <VerticalStackLayout Spacing="5">
-                        <Label Text="Fecha de Check-in *" 
-                               FontSize="14"
-                               TextColor="#666"/>
-                        <DatePicker x:Name="DatePickerCheckin"
-                                    Format="dd/MM/yyyy"/>
-                    </VerticalStackLayout>
-
-                    <!-- Motivo (opcional) -->
-                    <VerticalStackLayout Spacing="5">
-                        <Label Text="Motivo de Cancelación (Opcional)" 
-                               FontSize="14"
-                               TextColor="#666"/>
-                        <Editor x:Name="EditorMotivo"
-                                Placeholder="Cuéntanos por qué cancelas..."
-                                HeightRequest="100"/>
+                        <Label
+                            FontSize="14"
+                            Text="Motivo de Cancelación (Opcional)"
+                            TextColor="#666" />
+                        <Editor
+                            x:Name="EditorMotivo"
+                            HeightRequest="100"
+                            Placeholder="Cuéntanos por qué cancelas..." />
                     </VerticalStackLayout>
 
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Política de cancelación -->
-            <Frame BackgroundColor="#E3F2FD" 
-                   CornerRadius="10" 
-                   Padding="15"
-                   HasShadow="False">
+            <!--  Política de cancelación  -->
+            <Frame
+                Padding="15"
+                BackgroundColor="#E3F2FD"
+                CornerRadius="10"
+                HasShadow="False">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="📋 Política de Cancelación" 
-                           FontSize="16" 
-                           FontAttributes="Bold"
-                           TextColor="#1565C0"/>
-                    <Label FontSize="13" TextColor="#555" LineHeight="1.4">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Text="📋 Política de Cancelación"
+                        TextColor="#1565C0" />
+                    <Label
+                        FontSize="13"
+                        LineHeight="1.4"
+                        TextColor="#555">
                         <Label.Text>
                             - Cancelación gratuita hasta 48 horas antes del check-in
-- Cancelaciones entre 24-48 horas: cargo del 50%
-- Cancelaciones con menos de 24 horas: cargo del 100%
-- El reembolso se procesará en 5-7 días hábiles
+                            - Cancelaciones entre 24-48 horas: cargo del 50%
+                            - Cancelaciones con menos de 24 horas: cargo del 100%
+                            - El reembolso se procesará en 5-7 días hábiles
                         </Label.Text>
                     </Label>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Botones -->
-            <VerticalStackLayout Spacing="15">
-                <Button Text="Buscar Reservación"
-                        x:Name="BtnBuscar"
-                        BackgroundColor="#2196F3"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        CornerRadius="8"
-                        HeightRequest="50"
-                        Clicked="OnBuscarReservaClicked"/>
+            <!--  Botones  -->
 
-                <Button Text="Volver"
-                        BackgroundColor="Transparent"
-                        TextColor="#666"
-                        Clicked="OnVolverClicked"/>
+            <VerticalStackLayout Spacing="15">
+
+                <Button
+                    BackgroundColor="Transparent"
+                    Clicked="OnVolverClicked"
+                    Text="Volver"
+                    TextColor="#666" />
+
+                <Button
+                    x:Name="BtnConfirmarCancelacion"
+                    BackgroundColor="#F44336"
+                    Clicked="OnConfirmarCancelacionClicked"
+                    CornerRadius="8"
+                    FontAttributes="Bold"
+                    Text="Confirmar Cancelación"
+                    TextColor="White" />
             </VerticalStackLayout>
 
-            <!-- Resultado de búsqueda (oculto inicialmente) -->
-            <Frame x:Name="FrameResultado" 
-                   IsVisible="False"
-                   BackgroundColor="White" 
-                   CornerRadius="10" 
-                   Padding="20"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="Reservación Encontrada" 
-                           FontSize="18" 
-                           FontAttributes="Bold"
-                           TextColor="#4CAF50"/>
+            <!--  Indicadore de carga  -->
 
-                    <BoxView HeightRequest="1" BackgroundColor="#E0E0E0"/>
-
-                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
-                        <Label Grid.Row="0" Grid.Column="0" Text="Habitación:" FontAttributes="Bold"/>
-                        <Label Grid.Row="0" Grid.Column="1" x:Name="LblHabitacion" Text="-"/>
-
-                        <Label Grid.Row="1" Grid.Column="0" Text="Check-in:" FontAttributes="Bold"/>
-                        <Label Grid.Row="1" Grid.Column="1" x:Name="LblCheckin" Text="-"/>
-
-                        <Label Grid.Row="2" Grid.Column="0" Text="Check-out:" FontAttributes="Bold"/>
-                        <Label Grid.Row="2" Grid.Column="1" x:Name="LblCheckout" Text="-"/>
-
-                        <Label Grid.Row="3" Grid.Column="0" Text="Total:" FontAttributes="Bold"/>
-                        <Label Grid.Row="3" Grid.Column="1" x:Name="LblTotal" Text="-" TextColor="#D1A011" FontAttributes="Bold"/>
-                    </Grid>
-
-                    <Button Text="Confirmar Cancelación"
-                            x:Name="BtnConfirmarCancelacion"
-                            BackgroundColor="#F44336"
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            CornerRadius="8"
-                            Clicked="OnConfirmarCancelacionClicked"/>
-                </VerticalStackLayout>
-            </Frame>
+            <ActivityIndicator
+                x:Name="LoadingIndicator"
+                Margin="0,10,0,0"
+                HeightRequest="40"
+                IsRunning="False"
+                IsVisible="False"
+                Color="#6200EA" />
 
         </VerticalStackLayout>
+
     </ScrollView>
 </ContentPage>
