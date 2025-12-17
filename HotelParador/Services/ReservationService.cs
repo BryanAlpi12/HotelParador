@@ -67,7 +67,7 @@ namespace HotelParador.Services
                     return new List<ReservationWithRoom>();
                 }
 
-                // ✅ Protección contra null en user_id
+                // Protección contra null en user_id
                 int userId = users[0].id != null ? (int)users[0].id : 0;
                 Debug.WriteLine($"[GetUserReservations] User ID encontrado: {userId}");
 
@@ -105,7 +105,7 @@ namespace HotelParador.Services
                 {
                     try
                     {
-                        // ✅ Extraer y validar campos de la reservación
+                        // Extraer y validar campos de la reservación
                         int reservationId = reservation.id != null ? (int)reservation.id : 0;
                         int resUserId = reservation.user_id != null ? (int)reservation.user_id : 0;
                         int roomId = reservation.room_id != null ? (int)reservation.room_id : 0;
@@ -146,7 +146,7 @@ namespace HotelParador.Services
                             }
                         }
 
-                        // ✅ Extraer room_guests con protección completa contra nulls
+                        //  Extraer room_guests con protección completa contra nulls
                         int roomGuests = 2; // Default
                         if (room != null)
                         {
@@ -176,7 +176,7 @@ namespace HotelParador.Services
                             }
                         }
 
-                        // ✅ Extraer precio con protección contra nulls
+                        //  Extraer precio con protección contra nulls
                         decimal roomPrice = 0m;
                         if (room?.price != null)
                         {
@@ -190,7 +190,7 @@ namespace HotelParador.Services
                                 decimal.TryParse(room.price.ToString(), out roomPrice);
                         }
 
-                        // ✅ Extraer total con protección contra nulls
+                        //  Extraer total con protección contra nulls
                         decimal total = 0m;
                         if (reservation.total != null)
                         {
@@ -204,7 +204,7 @@ namespace HotelParador.Services
                                 decimal.TryParse(reservation.total.ToString(), out total);
                         }
 
-                        // ✅ Crear objeto con todos los campos protegidos
+                        //  Crear objeto con todos los campos protegidos
                         reservationsWithRooms.Add(new ReservationWithRoom
                         {
                             id = reservationId,

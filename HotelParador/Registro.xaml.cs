@@ -37,25 +37,32 @@ public partial class Registro : ContentPage
             return;
         }
 
-        var jsonData = JsonConvert.SerializeObject(nuevoUsuario);
-        var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-        cliente.DefaultRequestHeaders.Clear();
-        cliente.DefaultRequestHeaders.Add("apikey", AApikey);
-        cliente.DefaultRequestHeaders.Add("Authorization", $"Bearer {AApikey}");
-
-        var response = await cliente.PostAsync(url, content);
-
-        if (response.IsSuccessStatusCode)
+        if (pwd.Text == pwd2.Text)
         {
-            await DisplayAlert("Éxito", "El usuario fue registrado", "OK");
-            await Navigation.PushAsync(new Sesion());
+            var jsonData = JsonConvert.SerializeObject(nuevoUsuario);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            cliente.DefaultRequestHeaders.Clear();
+            cliente.DefaultRequestHeaders.Add("apikey", AApikey);
+            cliente.DefaultRequestHeaders.Add("Authorization", $"Bearer {AApikey}");
+
+            var response = await cliente.PostAsync(url, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Éxito", "El usuario fue registrado", "OK");
+                await Navigation.PushAsync(new Sesion());
+            }
+            else
+            {
+                var errorMsg = await response.Content.ReadAsStringAsync();
+                await DisplayAlert("Error", errorMsg, "OK");
+            }
+
         }
         else
         {
-            var errorMsg = await response.Content.ReadAsStringAsync();
-            await DisplayAlert("Error", errorMsg, "OK");
+            await DisplayAlert("Error", "Las contraseñas no coiniciden", "OK");
         }
-
     }
 }
